@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|edit - ${board.title}|"></title>
+    <link rel='stylesheet' href='/webjars/bootstrap/4.5.0/css/bootstrap.min.css'>
+</head>
+<body>
+<header th:insert="common/header.html"></header>
+<div class="container">
+    <form th:action="@{'/edit/'+ ${board.id}}" method="POST">
+        <input type="hidden" name="_method" value="put">
+        <input type="hidden" name="id" th:value="${board.id}">
+        <div class="form-group row">
+            <label for="inputTitle" class="col-sm-2 col-form-label"><strong >Title</strong></label>
+            <div class="col-sm-10">
+                <input type="text" name="title" class="form-control" id="inputTitle" th:value="${board.title}" >
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="inputContent" class="col-sm-2 col-form-label"><strong>Content</strong></label>
+            <div class="col-sm-10">
+                <textarea type="text" name="content" class="form-control" id="inputContent" th:text="${board.content}"></textarea>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-auto mr-auto"></div>
+            <div class="col-auto">
+                <input class="btn btn-primary" type="submit" role="button" value="Edit">
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
