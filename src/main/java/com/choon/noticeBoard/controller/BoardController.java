@@ -46,7 +46,6 @@ public class BoardController {
     @GetMapping("/edit/{id}")
     public String editPost(@PathVariable Long id, Model model) {
         BoardDto boardDto = boardService.getPost(id);
-        System.out.println(boardDto.getContent());
         model.addAttribute("board", boardDto);
         return "editPost";
     }
@@ -58,9 +57,9 @@ public class BoardController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        boardService.deletePost(id);
-        return "redirect:/";
+        public String delete(@PathVariable Long id) {
+            boardService.deletePost(id);
+            return "redirect:/";
     }
 
 }

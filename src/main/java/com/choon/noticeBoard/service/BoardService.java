@@ -70,7 +70,7 @@ public class BoardService {
 //        board.setContent(boardDto.getContent());
 
         // board Entity 클래스에 update 메소드를 하나 만들어줘서 수정 기능이 되게 한다.
-        board.update(boardDto.getTitle(), boardDto.getTitle());
+        board.update(boardDto.getTitle(), boardDto.getContent());
     }
 
     @Transactional
