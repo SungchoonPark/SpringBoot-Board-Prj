@@ -34,7 +34,7 @@ public class UserController {
 
     @GetMapping("/user")
     public String userList(Model model) {
-        List<UserDto> userDtoList = userService.showUsers();
+        List<UserDto> userDtoList = userService.getUserList();
         model.addAttribute("userList", userDtoList);
         return "user";
     }

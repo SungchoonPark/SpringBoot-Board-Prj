@@ -3,12 +3,15 @@ package com.choon.noticeBoard.model.Reply;
 import com.choon.noticeBoard.model.BaseTimeEntity;
 import com.choon.noticeBoard.model.Board.Board;
 import com.choon.noticeBoard.model.User.User;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+
 @Entity
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Reply extends BaseTimeEntity {
 
     @Id
@@ -16,7 +19,7 @@ public class Reply extends BaseTimeEntity {
     private long id;
 
     @Column(nullable = false, length = 300)
-    private String reply;
+    private String content;
 
     private int likes;
 
@@ -27,4 +30,19 @@ public class Reply extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "boardId")
     private Board board;
+
+    @Builder
+    public Reply(String content, int likes, User user, Board board) {
+        this.content = content;
+        this.likes = likes;
+        this.user = user;
+        this.board = board;
+    }
+
+    @Builder
+    public Reply(String content, int likes) {
+        this.content = content;
+        this.likes = likes;
+    }
+
 }

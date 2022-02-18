@@ -1,7 +1,6 @@
 package com.choon.noticeBoard.controller;
 
-import com.choon.noticeBoard.dto.BoardDto;
-import com.choon.noticeBoard.model.Board.Board;
+import com.choon.noticeBoard.dto.response.BoardResponseDto;
 import com.choon.noticeBoard.service.BoardService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -10,56 +9,44 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
+import java.util.List;
+
 @Controller
 public class BoardController {
 
-    private BoardService boardService;
+    private final BoardService boardService;
 
     public BoardController(BoardService boardService) {
         this.boardService = boardService;
     }
 
     @GetMapping({"", "/"})
-    public String index(Model model, @PageableDefault(size = 10, sort = "id", direction = Sort.Direction.DESC)Pageable pageable) {
-        model.addAttribute("boards", boardService.getBoardList(pageable));
+    public String index(Model model) {
+        List<BoardResponseDto> boardsList = boardService.getBoardList();
+        model.addAttribute("boards", boardsList);
         return "index";
     }
 
-    @GetMapping("/post")
+    @GetMapping("/board/post")
     public String post() {
         return "post";
     }
 
-    @PostMapping("/post")
-    public String post(BoardDto boardDto) {
-        boardService.savePost(boardDto);
-        return "redirect:/";
-    }
-
-    @GetMapping("/post/{id}")
+    @GetMapping("/board/{id}")
     public String detailPost(@PathVariable Long id, Model model) {
-        BoardDto boardDto = boardService.getPost(id);
-        model.addAttribute("board", boardDto);
+        BoardResponseDto boardResponseDto = boardService.getPost(id);
+        model.addAttribute("board", boardResponseDto);
+
         return "detailPost";
     }
 
-    @GetMapping("/edit/{id}")
+    @GetMapping("/board/{id}/edit")
     public String editPost(@PathVariable Long id, Model model) {
-        BoardDto boardDto = boardService.getPost(id);
-        model.addAttribute("board", boardDto);
+        BoardResponseDto boardResponseDto = boardService.getPost(id);
+        model.addAttribute("board", boardResponseDto);
         return "editPost";
     }
 
-    @PutMapping("/edit/{id}")
-    public String update(@PathVariable Long id, BoardDto boardDto) {
-        boardService.update(id, boardDto);
-        return "redirect:/";
-    }
-
-    @DeleteMapping("/delete/{id}")
-        public String delete(@PathVariable Long id) {
-            boardService.deletePost(id);
-            return "redirect:/";
-    }
 
 }

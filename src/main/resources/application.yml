@@ -12,7 +12,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/brdproject?serverTimezone=Asia/Seoul
     username: choon
-    password: qkrtjdcns1!
+    password: Qkrtjdcns1!
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 20MB
 
   jpa:
     hibernate:
@@ -24,3 +29,11 @@ spring:
       hibernate.format_sql: true
 #      hibernate.dialect: org.hibernate.dialect.MySQL5Dialect
     generate-ddl: true
+    database: mysql
+
+  devtools:
+    livereload:
+      enabled: true
+
+  thymeleaf:
+    cache: false

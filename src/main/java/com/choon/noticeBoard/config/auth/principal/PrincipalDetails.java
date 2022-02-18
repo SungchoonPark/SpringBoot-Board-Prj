@@ -2,12 +2,14 @@ package com.choon.noticeBoard.config.auth.principal;
 
 import com.choon.noticeBoard.model.RoleType;
 import com.choon.noticeBoard.model.User.User;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Getter
 public class PrincipalDetails implements UserDetails {
 
     private User user;

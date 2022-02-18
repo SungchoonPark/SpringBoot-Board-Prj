@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 public class UserDto {
+    private Long id;
     private String username;
     private String password;
     private String email;
@@ -30,7 +31,8 @@ public class UserDto {
     }
 
     @Builder
-    public UserDto(String username, String password, String email, RoleType role) {
+    public UserDto(Long id,String username, String password, String email, RoleType role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;

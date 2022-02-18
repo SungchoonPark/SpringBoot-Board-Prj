@@ -26,7 +26,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDto showUser(long id) {
+    public UserDto getUser(long id) {
         User user = userRepository.findById(id).get();
         UserDto userDto = UserDto.builder()
                 .username(user.getUsername())
@@ -38,7 +38,7 @@ public class UserService {
     }
 
     @Transactional
-    public List<UserDto> showUsers() {
+    public List<UserDto> getUserList() {
         List<User> userList = userRepository.findAll();
         List<UserDto> userDtoList = new ArrayList<>();
 
